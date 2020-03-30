@@ -66,3 +66,5 @@ target/
 #Intellij Projekt files
 .idea/
 *.iml
+
+*.orig
