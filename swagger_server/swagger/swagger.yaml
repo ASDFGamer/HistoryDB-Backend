@@ -1,0 +1,4014 @@
+openapi: 3.0.0
+info:
+  title: HistoryDB API
+  description: |
+    This is an API which provides infos about historical events It provides info about events, countries, settlements and persons and also relations between different objects. In next versions it should also add art as an element.
+  contact:
+    email: historyDB@christoph-wildhagen.de
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.1
+servers:
+- url: https://virtserver.swaggerhub.com/ASDFOrg/HistoryDB/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /type/events:
+    get:
+      description: Returns all event types
+      operationId: operations_types_list_event_types
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: A list of event types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /type/event:
+    post:
+      summary: adds an eventtype
+      operationId: operations_types_add_event_type
+      requestBody:
+        description: Event type to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventType'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "409":
+          description: Alredy created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /type/event/{id}:
+    get:
+      description: Returns an specific event type
+      operationId: operations_types_get_event_type
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: Returns a event type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventType'
+        "404":
+          description: The event type doesn' t exist
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates an specific event type
+      operationId: operations_types_update_event_type
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns a event type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventType'
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: The event type doesn' t exist
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes an specific event type
+      operationId: operations_types_delete_event_type
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The event type was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: The event type doesn' t exist
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /type/relations:
+    get:
+      description: Returns all relation types
+      operationId: operations_types_list_relation_types
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: A list of relation types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelationType'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /type/relation:
+    post:
+      summary: adds an relationtype
+      operationId: operations_types_add_relation_type
+      requestBody:
+        description: Relation type to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventType'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "409":
+          description: Alredy created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_409'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /type/relation/{id}:
+    get:
+      description: Returns an specific relation type
+      operationId: operations_types_get_relation_type
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: Returns a event type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventType'
+        "404":
+          description: The relation type doesn' t exist
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates an specific event type
+      operationId: operations_types_update_relation_type
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns a event type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventType'
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: The event type doesn' t exist
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes an specific relation type
+      operationId: operations_types_delete_relation_type
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The relation type was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: The relation type doesn' t exist
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /countries:
+    get:
+      description: Returns an List of all Countries
+      operationId: operations_country_list_countries
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: year
+        in: query
+        description: Specifies the year of the results
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1794
+      - name: population
+        in: query
+        description: Specifies the minimal polulation
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 1
+          type: integer
+          example: 20000
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: A List of countries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country:
+    post:
+      description: Creates an new Country
+      operationId: operations_country_create_country
+      responses:
+        "200":
+          description: Returns a country
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}:
+    get:
+      description: Returns an specific country
+      operationId: operations_country_get_country
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: Returns a country
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        "404":
+          description: The country doesn' t exist
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates an specific country
+      operationId: operations_country_update_country
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns a country
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: The country doesn' t exist
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes an specific country
+      operationId: operations_country_delete_country
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The country was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: The country doesn' t exist
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/border/{year}:
+    get:
+      operationId: operations_country_get_border
+      parameters:
+      - name: year
+        in: path
+        description: Specifies the year of the results
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1794
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns a border
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Border'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates the info about the country border for that year
+      operationId: operations_country_update_border
+      parameters:
+      - name: year
+        in: path
+        description: Specifies the year of the results
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1794
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns a border
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Border'
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes the info about border of the country
+      operationId: operations_country_delete_border
+      parameters:
+      - name: year
+        in: path
+        description: Specifies the year of the results
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1794
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The Info was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/borders:
+    get:
+      description: A List of all known Borders for the country
+      operationId: operations_country_list_borders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: year
+        in: query
+        description: Specifies the year of the results
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1794
+      responses:
+        "200":
+          description: A List of borders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Border'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/border:
+    post:
+      description: Creates a new border
+      operationId: operations_country_create_border
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/Border'
+      responses:
+        "200":
+          description: Returns a border
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Border'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/countries:
+    get:
+      description: A List with all countrys that are related to the country
+      operationId: operations_country_list_country_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of country relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryRelation'
+                x-content-type: application/json
+          links:
+            GetCountryById:
+              operationId: getCountry
+              parameters:
+                id: $response.body#/0/country
+              description: |
+                The `country` value returned in the response can be used as the `id` parameter in `GET /country/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/country:
+    post:
+      description: Link an existing country to this country
+      operationId: operations_country_create_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/country/{country_id}:
+    delete:
+      description: Deletes the Link between the country and the country
+      operationId: operations_country_delete_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: country_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/events:
+    get:
+      description: A List with all events that are related to the country
+      operationId: operations_country_list_event_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of event relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventRelation'
+                x-content-type: application/json
+          links:
+            GetEventById:
+              operationId: getEvent
+              parameters:
+                id: $response.body#/0/event
+              description: |
+                The `event` value returned in the response can be used as the `id` parameter in `GET /event/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/event:
+    post:
+      description: Link an existing event to this country
+      operationId: operations_country_create_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/event/{event_id}:
+    delete:
+      description: Deletes the Link between the country and the event
+      operationId: operations_country_delete_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: event_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/persons:
+    get:
+      description: A List with all country that are related to the person
+      operationId: operations_country_list_person_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of person relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonRelation'
+                x-content-type: application/json
+          links:
+            GetPersonById:
+              operationId: getPerson
+              parameters:
+                id: $response.body#/0/person
+              description: |
+                The `person` value returned in the response can be used as the `id` parameter in `GET /person/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/person:
+    post:
+      description: Link an existing person to this country
+      operationId: operations_country_create_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/person/{person_id}:
+    delete:
+      description: Deletes the Link between the country and the person
+      operationId: operations_country_delete_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/settlements:
+    get:
+      description: A List with all settlements that are related to the country
+      operationId: operations_country_list_settlement_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of settlement relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettlementRelation'
+                x-content-type: application/json
+          links:
+            GetSettlementById:
+              operationId: getSettlement
+              parameters:
+                id: $response.body#/0/settlement
+              description: |
+                The `settlement` value returned in the response can be used as the `id` parameter in `GET /settlement/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/settlement:
+    post:
+      description: Link an existing settlement to this country
+      operationId: operations_country_create_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /country/{id}/settlement/{settlement_id}:
+    delete:
+      description: Deletes the Link between the country and the settlement
+      operationId: operations_country_delete_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: settlement_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /events:
+    get:
+      description: Returns an list of all events
+      operationId: operations_event_list_events
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: year
+        in: query
+        description: Specifies the year of the results
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1794
+      - name: month
+        in: query
+        description: Specifies the month of the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 12
+          minimum: 0
+          type: integer
+          example: 11
+      - name: day
+        in: query
+        description: Specufies the day of the month of the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 31
+          minimum: 1
+          type: integer
+          example: 20
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: A List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event:
+    post:
+      description: Creates an new event
+      operationId: operations_event_create_event
+      requestBody:
+        $ref: '#/components/requestBodies/Event'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}:
+    get:
+      description: Returns an specific event
+      operationId: operations_event_get_event
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: Returns the event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          links:
+            GetEventTypeById:
+              operationId: getEventType
+              parameters:
+                id: $response.body#/eventtype
+              description: |
+                The `eventtype` value returned in the response can be used as the `id` parameter in `GET /type/event/{id}`.
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates an specific event
+      operationId: operations_event_update_event
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns the event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          links:
+            GetEventTypeById:
+              operationId: getEventType
+              parameters:
+                id: $response.body#/eventtype
+              description: |
+                The `eventtype` value returned in the response can be used as the `id` parameter in `GET /type/event/{id}`.
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes an specific event
+      operationId: operations_event_delete_event
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The Event was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_404'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/countries:
+    get:
+      description: A List with all countrys that are related to the event
+      operationId: operations_event_list_country_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of country relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryRelation'
+                x-content-type: application/json
+          links:
+            GetCountryById:
+              operationId: getCountry
+              parameters:
+                id: $response.body#/0/country
+              description: |
+                The `country` value returned in the response can be used as the `id` parameter in `GET /country/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/country:
+    post:
+      description: Link an existing country to this event
+      operationId: operations_event_create_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/country/{country_id}:
+    delete:
+      description: Deletes the Link between the event and the country
+      operationId: operations_event_delete_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: country_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/events:
+    get:
+      description: A List with all events that are related to the event
+      operationId: operations_event_list_event_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of event relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventRelation'
+                x-content-type: application/json
+          links:
+            GetEventById:
+              operationId: getEvent
+              parameters:
+                id: $response.body#/0/event
+              description: |
+                The `event` value returned in the response can be used as the `id` parameter in `GET /event/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/event:
+    post:
+      description: Link an existing event to this event
+      operationId: operations_event_create_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/event/{event_id}:
+    delete:
+      description: Deletes the Link between the event and the event
+      operationId: operations_event_delete_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: event_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/persons:
+    get:
+      description: A List with all event that are related to the person
+      operationId: operations_event_list_person_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of person relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonRelation'
+                x-content-type: application/json
+          links:
+            GetPersonById:
+              operationId: getPerson
+              parameters:
+                id: $response.body#/0/person
+              description: |
+                The `person` value returned in the response can be used as the `id` parameter in `GET /person/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/person:
+    post:
+      description: Link an existing person to this event
+      operationId: operations_event_create_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/person/{person_id}:
+    delete:
+      description: Deletes the Link between the event and the person
+      operationId: operations_event_delete_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/settlements:
+    get:
+      description: A List with all settlements that are related to the event
+      operationId: operations_event_list_settlement_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of settlement relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettlementRelation'
+                x-content-type: application/json
+          links:
+            GetSettlementById:
+              operationId: getSettlement
+              parameters:
+                id: $response.body#/0/settlement
+              description: |
+                The `settlement` value returned in the response can be used as the `id` parameter in `GET /settlement/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/settlement:
+    post:
+      description: Link an existing settlement to this event
+      operationId: operations_event_create_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /event/{id}/settlement/{settlement_id}:
+    delete:
+      description: Deletes the Link between the event and the settlement
+      operationId: operations_event_delete_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: settlement_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /persons:
+    get:
+      description: Returns a list of all Persons
+      operationId: operations_person_list_persons
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: year
+        in: query
+        description: Specifies the year of the results
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1794
+      responses:
+        "200":
+          description: The Info was updated
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person:
+    post:
+      description: Creates a new Person
+      operationId: operations_person_create_person
+      requestBody:
+        $ref: '#/components/requestBodies/Person'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}:
+    get:
+      description: Returns the person with that id
+      operationId: operations_person_get_person
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Returns a person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates the Info for an Person
+      operationId: operations_person_update_person
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The Person is updated
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes the Info for an Person
+      operationId: operations_person_delete_person
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The info about the person is deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/countries:
+    get:
+      description: A List with all countrys that are related to the person
+      operationId: operations_person_list_country_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of country relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryRelation'
+                x-content-type: application/json
+          links:
+            GetCountryById:
+              operationId: getCountry
+              parameters:
+                id: $response.body#/0/country
+              description: |
+                The `country` value returned in the response can be used as the `id` parameter in `GET /country/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/country:
+    post:
+      description: Link an existing country to this person
+      operationId: operations_person_create_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/country/{country_id}:
+    delete:
+      description: Deletes the Link between the person and the country
+      operationId: operations_person_delete_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: country_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/events:
+    get:
+      description: A List with all events that are related to the person
+      operationId: operations_person_list_event_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of event relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventRelation'
+                x-content-type: application/json
+          links:
+            GetEventById:
+              operationId: getEvent
+              parameters:
+                id: $response.body#/0/event
+              description: |
+                The `event` value returned in the response can be used as the `id` parameter in `GET /event/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/event:
+    post:
+      description: Link an existing event to this person
+      operationId: operations_person_create_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/event/{event_id}:
+    delete:
+      description: Deletes the Link between the person and the event
+      operationId: operations_person_delete_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: event_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/persons:
+    get:
+      description: A List with all persons that are related to the person
+      operationId: operations_person_list_person_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of person relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonRelation'
+                x-content-type: application/json
+          links:
+            GetPersonById:
+              operationId: getPerson
+              parameters:
+                id: $response.body#/0/person
+              description: |
+                The `person` value returned in the response can be used as the `id` parameter in `GET /person/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/person:
+    post:
+      description: Link an existing person to this person
+      operationId: operations_person_create_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/person/{person_id}:
+    delete:
+      description: Deletes the Link between the person and the person
+      operationId: operations_person_delete_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/settlements:
+    get:
+      description: A List with all settlements that are related to the person
+      operationId: operations_person_list_settlement_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of settlement relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettlementRelation'
+                x-content-type: application/json
+          links:
+            GetSettlementById:
+              operationId: getSettlement
+              parameters:
+                id: $response.body#/0/settlement
+              description: |
+                The `settlement` value returned in the response can be used as the `id` parameter in `GET /settlement/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/settlement:
+    post:
+      description: Link an existing settlement to this person
+      operationId: operations_person_create_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /person/{id}/settlement/{settlement_id}:
+    delete:
+      description: Deletes the Link between the person and the settlement
+      operationId: operations_person_delete_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: settlement_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlements:
+    get:
+      description: Returns a list with all settlements
+      operationId: operations_settlement_list_settlements
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: year
+        in: query
+        description: Specifies the year of the results
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1794
+      - name: population
+        in: query
+        description: Specifies the minimal polulation
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 1
+          type: integer
+          example: 20000
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: A list of settlements
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement:
+    post:
+      description: Creates a new settlement
+      operationId: operations_settlement_create_settlement
+      responses:
+        "200":
+          description: The settlement was created
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}:
+    get:
+      description: Returns the settlement with that id
+      operationId: operations_settlement_get_settlement
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: Returns the settlement with that id
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    put:
+      description: Updates the Info for an Settlement
+      operationId: operations_settlement_update_settlement
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The info for the settlement is updated
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+    delete:
+      description: Deletes the Info for an settlement
+      operationId: operations_settlement_delete_settlement
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The info about the settlement is deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/countries:
+    get:
+      description: A List with all countrys that are related to the settlement
+      operationId: operations_settlement_list_country_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of country relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryRelation'
+                x-content-type: application/json
+          links:
+            GetCountryById:
+              operationId: getCountry
+              parameters:
+                id: $response.body#/0/country
+              description: |
+                The `country` value returned in the response can be used as the `id` parameter in `GET /country/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/country:
+    post:
+      description: Link an existing country to this settlement
+      operationId: operations_settlement_create_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/country/{country_id}:
+    delete:
+      description: Deletes the Link between the settlement and the country
+      operationId: operations_settlement_delete_country_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: country_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/events:
+    get:
+      description: A List with all events that are related to the settlement
+      operationId: operations_settlement_list_event_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of event relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventRelation'
+                x-content-type: application/json
+          links:
+            GetEventById:
+              operationId: getEvent
+              parameters:
+                id: $response.body#/0/event
+              description: |
+                The `event` value returned in the response can be used as the `id` parameter in `GET /event/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/event:
+    post:
+      description: Link an existing event to this settlement
+      operationId: operations_settlement_create_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/event/{event_id}:
+    delete:
+      description: Deletes the Link between the settlement and the event
+      operationId: operations_settlement_delete_event_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: event_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/persons:
+    get:
+      description: A List with all persons that are related to the settlement
+      operationId: operations_settlement_list_person_relations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Returns a List of person relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonRelation'
+                x-content-type: application/json
+          links:
+            GetPersonById:
+              operationId: getPerson
+              parameters:
+                id: $response.body#/0/person
+              description: |
+                The `person` value returned in the response can be used as the `id` parameter in `GET /person/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/person:
+    post:
+      description: Link an existing person to this settlement
+      operationId: operations_settlement_create_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/person/{person_id}:
+    delete:
+      description: Deletes the Link between the settlement and the person
+      operationId: operations_settlement_delete_person_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/settlements:
+    get:
+      description: A List with all settlements that are related to the settlement
+      operationId: operations_settlement_list_settlement_relations
+      parameters:
+      - name: limit
+        in: query
+        description: Limits the number of items on a page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Specifies the page number of the artists to be displayed
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Specifies the relation to the event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int64
+      - name: accept_language
+        in: header
+        description: Specifies the language of the result
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: en_US
+      responses:
+        "200":
+          description: Returns a List of settlement relations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettlementRelation'
+                x-content-type: application/json
+          links:
+            GetSettlementById:
+              operationId: getSettlement
+              parameters:
+                id: $response.body#/0/settlement
+              description: |
+                The `settlement` value returned in the response can be used as the `id` parameter in `GET /settlement/{id}`.
+            GetRelationByID:
+              $ref: '#/components/links/GetRelationByID'
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/settlement:
+    post:
+      description: Link an existing settlement to this settlement
+      operationId: operations_settlement_create_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        $ref: '#/components/requestBodies/RelationLink'
+      responses:
+        "201":
+          description: The element was created
+          headers:
+            location:
+              description: Location of the new element
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /settlement/{id}/settlement/{settlement_id}:
+    delete:
+      description: Deletes the Link between the settlement and the settlement
+      operationId: operations_settlement_delete_settlement_relation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: settlement_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: The link was deleted
+        "401":
+          description: Not authentified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+      security:
+      - bearerAuth: []
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+components:
+  schemas:
+    ID:
+      minimum: 0
+      type: integer
+      description: The ID of an already existing element
+      format: int64
+      example: 342
+    Language:
+      type: string
+      example: EN_gb
+    Source:
+      oneOf:
+      - type: object
+        properties:
+          booktitle:
+            type: string
+          author:
+            type: string
+          page:
+            type: integer
+          isbn:
+            type: string
+      - type: object
+        properties:
+          weblink:
+            type: string
+          date:
+            type: string
+            format: date
+          author:
+            type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/Source'
+    HistoricDate:
+      required:
+      - year
+      type: object
+      properties:
+        year:
+          type: integer
+          example: 1794
+        month:
+          maximum: 12
+          minimum: 1
+          type: integer
+        day:
+          maximum: 31
+          minimum: 1
+          type: integer
+        inaccuracy_year:
+          minimum: 0
+          type: integer
+        inaccuracy_month:
+          maximum: 6
+          minimum: 0
+          type: integer
+        inaccuracy_day:
+          maximum: 16
+          minimum: 0
+          type: integer
+      example:
+        inaccuracy_day: 9
+        month: 1
+        year: 1794
+        inaccuracy_year: 0
+        day: 19
+        inaccuracy_month: 3
+    TimeFrame:
+      required:
+      - start
+      type: object
+      properties:
+        start:
+          $ref: '#/components/schemas/HistoricDate'
+        end:
+          $ref: '#/components/schemas/HistoricDate'
+      example:
+        start:
+          inaccuracy_day: 9
+          month: 1
+          year: 1794
+          inaccuracy_year: 0
+          day: 19
+          inaccuracy_month: 3
+    GenericDefaultLanguage:
+      required:
+      - default_language
+      - default_name
+      type: object
+      properties:
+        default_language:
+          $ref: '#/components/schemas/Language'
+        default_name:
+          type: string
+          example: War
+        translations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericDefaultLanguage_translations'
+      example:
+        default_name: War
+        translations:
+        - name: name
+        - name: name
+        default_language: EN_gb
+    GeoPoint:
+      required:
+      - langitude
+      - longitude
+      type: object
+      properties:
+        id:
+          type: integer
+        longitude:
+          type: number
+        langitude:
+          type: number
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+      example:
+        langitude: 1.46581298050294517310021547018550336360931396484375
+        name:
+          default_name: War
+          translations:
+          - name: name
+          - name: name
+          default_language: EN_gb
+        id: 0
+        longitude: 6.02745618307040320615897144307382404804229736328125
+    Title:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+      example:
+        name:
+          default_name: War
+          translations:
+          - name: name
+          - name: name
+          default_language: EN_gb
+        id: 0
+    EventType:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+        id:
+          type: integer
+      example:
+        name:
+          default_name: War
+          translations:
+          - name: name
+          - name: name
+          default_language: EN_gb
+        id: 0
+    RelationType:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+        id:
+          type: integer
+      example:
+        name:
+          default_name: War
+          translations:
+          - name: name
+          - name: name
+          default_language: EN_gb
+        id: 0
+    Event:
+      type: object
+      properties:
+        eventtype:
+          type: integer
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+        time:
+          $ref: '#/components/schemas/TimeFrame'
+        source:
+          $ref: '#/components/schemas/Source'
+      example:
+        name:
+          default_name: War
+          translations:
+          - name: name
+          - name: name
+          default_language: EN_gb
+        eventtype: 0
+        time:
+          start:
+            inaccuracy_day: 9
+            month: 1
+            year: 1794
+            inaccuracy_year: 0
+            day: 19
+            inaccuracy_month: 3
+        source: ""
+    Border:
+      required:
+      - positions
+      type: object
+      properties:
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeoPoint'
+        duration:
+          $ref: '#/components/schemas/TimeFrame'
+        source:
+          $ref: '#/components/schemas/Source'
+      example:
+        duration:
+          start:
+            inaccuracy_day: 9
+            month: 1
+            year: 1794
+            inaccuracy_year: 0
+            day: 19
+            inaccuracy_month: 3
+        positions:
+        - langitude: 1.46581298050294517310021547018550336360931396484375
+          name:
+            default_name: War
+            translations:
+            - name: name
+            - name: name
+            default_language: EN_gb
+          id: 0
+          longitude: 6.02745618307040320615897144307382404804229736328125
+        - langitude: 1.46581298050294517310021547018550336360931396484375
+          name:
+            default_name: War
+            translations:
+            - name: name
+            - name: name
+            default_language: EN_gb
+          id: 0
+          longitude: 6.02745618307040320615897144307382404804229736328125
+        source: ""
+    Country:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+        existing:
+          $ref: '#/components/schemas/TimeFrame'
+        source:
+          $ref: '#/components/schemas/Source'
+      example:
+        existing:
+          start:
+            inaccuracy_day: 9
+            month: 1
+            year: 1794
+            inaccuracy_year: 0
+            day: 19
+            inaccuracy_month: 3
+        name:
+          default_name: War
+          translations:
+          - name: name
+          - name: name
+          default_language: EN_gb
+        source: ""
+    Settlement:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+        existing:
+          $ref: '#/components/schemas/TimeFrame'
+        location:
+          $ref: '#/components/schemas/GeoPoint'
+        source:
+          $ref: '#/components/schemas/Source'
+    Person:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/Title'
+        name:
+          $ref: '#/components/schemas/GenericDefaultLanguage'
+        lifetime:
+          $ref: '#/components/schemas/TimeFrame'
+        source:
+          $ref: '#/components/schemas/Source'
+      example:
+        lifetime:
+          start:
+            inaccuracy_day: 9
+            month: 1
+            year: 1794
+            inaccuracy_year: 0
+            day: 19
+            inaccuracy_month: 3
+        source: ""
+        title:
+          name:
+            default_name: War
+            translations:
+            - name: name
+            - name: name
+            default_language: EN_gb
+          id: 0
+    EventRelation:
+      type: object
+      properties:
+        type:
+          type: integer
+        event:
+          type: integer
+      example:
+        type: 0
+        event: 6
+    CountryRelation:
+      type: object
+      properties:
+        type:
+          type: integer
+        event:
+          type: integer
+      example:
+        type: 0
+        event: 6
+    SettlementRelation:
+      type: object
+      properties:
+        type:
+          type: integer
+        event:
+          type: integer
+      example:
+        type: 0
+        event: 6
+    PersonRelation:
+      type: object
+      properties:
+        type:
+          type: integer
+        event:
+          type: integer
+      example:
+        type: 0
+        event: 6
+    inline_response_401:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Not authentified
+    inline_response_409:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The Object is already created
+    inline_response_404:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Can' t find ressource
+    GenericDefaultLanguage_translations:
+      type: object
+      properties:
+        language:
+          $ref: '#/components/schemas/Language'
+        name:
+          type: string
+      example:
+        name: name
+  responses:
+    Event:
+      description: Returns the event
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Event'
+      links:
+        GetEventTypeById:
+          operationId: getEventType
+          parameters:
+            id: $response.body#/eventtype
+          description: |
+            The `eventtype` value returned in the response can be used as the `id` parameter in `GET /type/event/{id}`.
+    EventRelationList:
+      description: Returns a List of event relations
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/EventRelation'
+            x-content-type: application/json
+      links:
+        GetEventById:
+          operationId: getEvent
+          parameters:
+            id: $response.body#/0/event
+          description: |
+            The `event` value returned in the response can be used as the `id` parameter in `GET /event/{id}`.
+        GetRelationByID:
+          $ref: '#/components/links/GetRelationByID'
+    Border:
+      description: Returns a border
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Border'
+    Country:
+      description: Returns a country
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Country'
+    CountryRelationList:
+      description: Returns a List of country relations
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/CountryRelation'
+            x-content-type: application/json
+      links:
+        GetCountryById:
+          operationId: getCountry
+          parameters:
+            id: $response.body#/0/country
+          description: |
+            The `country` value returned in the response can be used as the `id` parameter in `GET /country/{id}`.
+        GetRelationByID:
+          $ref: '#/components/links/GetRelationByID'
+    Settlement:
+      description: Returns a settlement
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Settlement'
+    SettlementRelationList:
+      description: Returns a List of settlement relations
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SettlementRelation'
+            x-content-type: application/json
+      links:
+        GetSettlementById:
+          operationId: getSettlement
+          parameters:
+            id: $response.body#/0/settlement
+          description: |
+            The `settlement` value returned in the response can be used as the `id` parameter in `GET /settlement/{id}`.
+        GetRelationByID:
+          $ref: '#/components/links/GetRelationByID'
+    Person:
+      description: Returns a person
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Person'
+    PersonRelationList:
+      description: Returns a List of person relations
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PersonRelation'
+            x-content-type: application/json
+      links:
+        GetPersonById:
+          operationId: getPerson
+          parameters:
+            id: $response.body#/0/person
+          description: |
+            The `person` value returned in the response can be used as the `id` parameter in `GET /person/{id}`.
+        GetRelationByID:
+          $ref: '#/components/links/GetRelationByID'
+    EventType:
+      description: Returns a event type
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventType'
+    RelationType:
+      description: Returns a relation type
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RelationType'
+    Created:
+      description: The element was created
+      headers:
+        location:
+          description: Location of the new element
+          style: simple
+          explode: false
+          schema:
+            type: string
+    "401Error":
+      description: Not authentified
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_401'
+    "404Error":
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_404'
+    "409Error":
+      description: Alredy created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_409'
+  parameters:
+    PageLimit:
+      name: limit
+      in: query
+      description: Limits the number of items on a page
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+    PageOffset:
+      name: offset
+      in: query
+      description: Specifies the page number of the artists to be displayed
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+    Settlement:
+      name: settlement
+      in: query
+      description: Specifies the Settlement that all Results should relate to
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int64
+    Country:
+      name: country
+      in: query
+      description: Specifies the Country that all Results should relate to
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int64
+    Person:
+      name: person
+      in: query
+      description: Specifies the Person that all Results should relate to
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int64
+    EventType:
+      name: type
+      in: query
+      description: Specifies the type of event
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int64
+    RelationType:
+      name: type
+      in: query
+      description: Specifies the relation to the event
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int64
+    Year:
+      name: year
+      in: query
+      description: Specifies the year of the results
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        example: 1794
+    YearPath:
+      name: year
+      in: path
+      description: Specifies the year of the results
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        example: 1794
+    Month:
+      name: month
+      in: query
+      description: Specifies the month of the event
+      required: false
+      style: form
+      explode: true
+      schema:
+        maximum: 12
+        minimum: 0
+        type: integer
+        example: 11
+    Day:
+      name: day
+      in: query
+      description: Specufies the day of the month of the event
+      required: false
+      style: form
+      explode: true
+      schema:
+        maximum: 31
+        minimum: 1
+        type: integer
+        example: 20
+    Population:
+      name: population
+      in: query
+      description: Specifies the minimal polulation
+      required: false
+      style: form
+      explode: true
+      schema:
+        minimum: 1
+        type: integer
+        example: 20000
+    ID:
+      name: id
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        format: int64
+    Language:
+      name: accept_language
+      in: header
+      description: Specifies the language of the result
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+        example: en_US
+  requestBodies:
+    Event:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Event'
+    Border:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Border'
+    Person:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Person'
+    RelationLink:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              targetID:
+                type: number
+              typeID:
+                type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      x-bearerInfoFunc: swagger_server.controllers.authorization_controller.check_bearerAuth
+  links:
+    GetRelationByID:
+      operationId: getRelationType
+      parameters:
+        id: $response.body#/0/type
+      description: |
+        The `type` value returned in the response can be used as the `id` parameter in `GET type/relation/{id}`.
+
