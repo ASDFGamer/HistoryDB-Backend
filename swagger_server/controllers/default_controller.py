@@ -31,7 +31,7 @@ def operations_country_create_border(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Border.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.country.createborder(id, body)
 
 
 def operations_country_create_country():  # noqa: E501
@@ -42,7 +42,7 @@ def operations_country_create_country():  # noqa: E501
 
     :rtype: Country
     """
-    return 'do some magic!'
+    return swagger_server.services.country.createcountry()
 
 
 def operations_country_create_country_relation(id, body=None):  # noqa: E501
@@ -59,7 +59,7 @@ def operations_country_create_country_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.country.createcountryrelation(id, body)
 
 
 def operations_country_create_event_relation(id, body=None):  # noqa: E501
@@ -76,7 +76,7 @@ def operations_country_create_event_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.country.createeventrelation(id, body)
 
 
 def operations_country_create_person_relation(id, body=None):  # noqa: E501
@@ -93,7 +93,7 @@ def operations_country_create_person_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.country.createpersonrelation(id, body)
 
 
 def operations_country_create_settlement_relation(id, body=None):  # noqa: E501
@@ -110,7 +110,7 @@ def operations_country_create_settlement_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.country.createsettlementrelation(id, body)
 
 
 def operations_country_delete_border(year, id):  # noqa: E501
@@ -125,7 +125,7 @@ def operations_country_delete_border(year, id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.country.deleteborder(year, id)
 
 
 def operations_country_delete_country(id):  # noqa: E501
@@ -138,7 +138,7 @@ def operations_country_delete_country(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.country.deletecountry(id)
 
 
 def operations_country_delete_country_relation(id, country_id):  # noqa: E501
@@ -153,7 +153,7 @@ def operations_country_delete_country_relation(id, country_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.country.deletecountryrelation(id, country_id)
 
 
 def operations_country_delete_event_relation(id, event_id):  # noqa: E501
@@ -168,7 +168,7 @@ def operations_country_delete_event_relation(id, event_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.country.deleteeventrelation(id, event_id)
 
 
 def operations_country_delete_person_relation(id, person_id):  # noqa: E501
@@ -183,7 +183,7 @@ def operations_country_delete_person_relation(id, person_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.country.deletepersonrelation(id, person_id)
 
 
 def operations_country_delete_settlement_relation(id, settlement_id):  # noqa: E501
@@ -198,7 +198,7 @@ def operations_country_delete_settlement_relation(id, settlement_id):  # noqa: E
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.country.deletesettlementrelation(id, settlement_id)
 
 
 def operations_country_get_border(year, id):  # noqa: E501
@@ -213,7 +213,7 @@ def operations_country_get_border(year, id):  # noqa: E501
 
     :rtype: Border
     """
-    return 'do some magic!'
+    return swagger_server.services.country.getborder(year, id)
 
 
 def operations_country_get_country(id, accept_language=None):  # noqa: E501
@@ -228,7 +228,7 @@ def operations_country_get_country(id, accept_language=None):  # noqa: E501
 
     :rtype: Country
     """
-    return 'do some magic!'
+    return swagger_server.services.country.getcountry(id, accept_language)
 
 
 def operations_country_list_borders(id, limit=None, offset=None, year=None):  # noqa: E501
@@ -247,7 +247,7 @@ def operations_country_list_borders(id, limit=None, offset=None, year=None):  # 
 
     :rtype: List[Border]
     """
-    return 'do some magic!'
+    return swagger_server.services.country.listborders(id, limit, offset, year)
 
 
 def operations_country_list_countries(limit=None, offset=None, year=None, population=None, accept_language=None):  # noqa: E501
@@ -268,7 +268,7 @@ def operations_country_list_countries(limit=None, offset=None, year=None, popula
 
     :rtype: List[Country]
     """
-    return 'do some magic!'
+    return swagger_server.services.country.listcountries(limit, offset, year, population, accept_language)
 
 
 def operations_country_list_country_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -289,7 +289,7 @@ def operations_country_list_country_relations(id, type=None, accept_language=Non
 
     :rtype: List[CountryRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.country.listcountryrelations(id, type, accept_language, limit, offset)
 
 
 def operations_country_list_event_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -310,7 +310,7 @@ def operations_country_list_event_relations(id, type=None, accept_language=None,
 
     :rtype: List[EventRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.country.listeventrelations(id, type, accept_language, limit, offset)
 
 
 def operations_country_list_person_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -331,7 +331,7 @@ def operations_country_list_person_relations(id, type=None, accept_language=None
 
     :rtype: List[PersonRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.country.listpersonrelations(id, type, accept_language, limit, offset)
 
 
 def operations_country_list_settlement_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -352,7 +352,7 @@ def operations_country_list_settlement_relations(id, type=None, accept_language=
 
     :rtype: List[SettlementRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.country.listsettlementrelations(id, type, accept_language, limit, offset)
 
 
 def operations_country_update_border(year, id):  # noqa: E501
@@ -367,7 +367,7 @@ def operations_country_update_border(year, id):  # noqa: E501
 
     :rtype: Border
     """
-    return 'do some magic!'
+    return swagger_server.services.country.updateborder(year, id)
 
 
 def operations_country_update_country(id):  # noqa: E501
@@ -380,7 +380,7 @@ def operations_country_update_country(id):  # noqa: E501
 
     :rtype: Country
     """
-    return 'do some magic!'
+    return swagger_server.services.country.updatecountry(id)
 
 
 def operations_event_create_country_relation(id, body=None):  # noqa: E501
@@ -397,7 +397,7 @@ def operations_event_create_country_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.event.createcountryrelation(id, body)
 
 
 def operations_event_create_event(body=None):  # noqa: E501
@@ -412,7 +412,7 @@ def operations_event_create_event(body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Event.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.event.createevent(body)
 
 
 def operations_event_create_event_relation(id, body=None):  # noqa: E501
@@ -429,7 +429,7 @@ def operations_event_create_event_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.event.createeventrelation(id, body)
 
 
 def operations_event_create_person_relation(id, body=None):  # noqa: E501
@@ -446,7 +446,7 @@ def operations_event_create_person_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.event.createpersonrelation(id, body)
 
 
 def operations_event_create_settlement_relation(id, body=None):  # noqa: E501
@@ -463,7 +463,7 @@ def operations_event_create_settlement_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.event.createsettlementrelation(id, body)
 
 
 def operations_event_delete_country_relation(id, country_id):  # noqa: E501
@@ -478,7 +478,7 @@ def operations_event_delete_country_relation(id, country_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.event.deletecountryrelation(id, country_id)
 
 
 def operations_event_delete_event(id):  # noqa: E501
@@ -491,7 +491,7 @@ def operations_event_delete_event(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.event.deleteevent(id)
 
 
 def operations_event_delete_event_relation(id, event_id):  # noqa: E501
@@ -506,7 +506,7 @@ def operations_event_delete_event_relation(id, event_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.event.deleteeventrelation(id, event_id)
 
 
 def operations_event_delete_person_relation(id, person_id):  # noqa: E501
@@ -521,7 +521,7 @@ def operations_event_delete_person_relation(id, person_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.event.deletepersonrelation(id, person_id)
 
 
 def operations_event_delete_settlement_relation(id, settlement_id):  # noqa: E501
@@ -536,7 +536,7 @@ def operations_event_delete_settlement_relation(id, settlement_id):  # noqa: E50
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.event.deletesettlementrelation(id, settlement_id)
 
 
 def operations_event_get_event(id, accept_language=None):  # noqa: E501
@@ -551,7 +551,7 @@ def operations_event_get_event(id, accept_language=None):  # noqa: E501
 
     :rtype: Event
     """
-    return 'do some magic!'
+    return swagger_server.services.event.getevent(id, accept_language)
 
 
 def operations_event_list_country_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -572,7 +572,7 @@ def operations_event_list_country_relations(id, type=None, accept_language=None,
 
     :rtype: List[CountryRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.event.listcountryrelations(id, type, accept_language, limit, offset)
 
 
 def operations_event_list_event_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -593,7 +593,7 @@ def operations_event_list_event_relations(id, type=None, accept_language=None, l
 
     :rtype: List[EventRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.event.listeventrelations(id, type, accept_language, limit, offset)
 
 
 def operations_event_list_events(limit=None, offset=None, year=None, month=None, day=None, accept_language=None):  # noqa: E501
@@ -616,7 +616,7 @@ def operations_event_list_events(limit=None, offset=None, year=None, month=None,
 
     :rtype: List[Event]
     """
-    return 'do some magic!'
+    return swagger_server.services.event.listevents(limit, offset, year, month, day, accept_language)
 
 
 def operations_event_list_person_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -637,7 +637,7 @@ def operations_event_list_person_relations(id, type=None, accept_language=None, 
 
     :rtype: List[PersonRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.event.listpersonrelations(id, type, accept_language, limit, offset)
 
 
 def operations_event_list_settlement_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -658,7 +658,7 @@ def operations_event_list_settlement_relations(id, type=None, accept_language=No
 
     :rtype: List[SettlementRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.event.listsettlementrelations(id, type, accept_language, limit, offset)
 
 
 def operations_event_update_event(id):  # noqa: E501
@@ -671,7 +671,7 @@ def operations_event_update_event(id):  # noqa: E501
 
     :rtype: Event
     """
-    return 'do some magic!'
+    return swagger_server.services.event.updateevent(id)
 
 
 def operations_person_create_country_relation(id, body=None):  # noqa: E501
@@ -688,7 +688,7 @@ def operations_person_create_country_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.person.createcountryrelation(id, body)
 
 
 def operations_person_create_event_relation(id, body=None):  # noqa: E501
@@ -705,7 +705,7 @@ def operations_person_create_event_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.person.createeventrelation(id, body)
 
 
 def operations_person_create_person(body=None):  # noqa: E501
@@ -720,7 +720,7 @@ def operations_person_create_person(body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Person.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.person.createperson(body)
 
 
 def operations_person_create_person_relation(id, body=None):  # noqa: E501
@@ -737,7 +737,7 @@ def operations_person_create_person_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.person.createpersonrelation(id, body)
 
 
 def operations_person_create_settlement_relation(id, body=None):  # noqa: E501
@@ -754,7 +754,7 @@ def operations_person_create_settlement_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.person.createsettlementrelation(id, body)
 
 
 def operations_person_delete_country_relation(id, country_id):  # noqa: E501
@@ -769,7 +769,7 @@ def operations_person_delete_country_relation(id, country_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.deletecountryrelation(id, country_id)
 
 
 def operations_person_delete_event_relation(id, event_id):  # noqa: E501
@@ -784,7 +784,7 @@ def operations_person_delete_event_relation(id, event_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.deleteeventrelation(id, event_id)
 
 
 def operations_person_delete_person(id):  # noqa: E501
@@ -797,7 +797,7 @@ def operations_person_delete_person(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.deleteperson(id)
 
 
 def operations_person_delete_person_relation(id, person_id):  # noqa: E501
@@ -812,7 +812,7 @@ def operations_person_delete_person_relation(id, person_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.deletepersonrelation(id, person_id)
 
 
 def operations_person_delete_settlement_relation(id, settlement_id):  # noqa: E501
@@ -827,7 +827,7 @@ def operations_person_delete_settlement_relation(id, settlement_id):  # noqa: E5
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.deletesettlementrelation(id, settlement_id)
 
 
 def operations_person_get_person(id):  # noqa: E501
@@ -840,7 +840,7 @@ def operations_person_get_person(id):  # noqa: E501
 
     :rtype: Person
     """
-    return 'do some magic!'
+    return swagger_server.services.person.getperson(id)
 
 
 def operations_person_list_country_relations(id, type=None, limit=None, offset=None):  # noqa: E501
@@ -859,7 +859,7 @@ def operations_person_list_country_relations(id, type=None, limit=None, offset=N
 
     :rtype: List[CountryRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.person.listcountryrelations(id, type, limit, offset)
 
 
 def operations_person_list_event_relations(id, type=None, limit=None, offset=None):  # noqa: E501
@@ -878,7 +878,7 @@ def operations_person_list_event_relations(id, type=None, limit=None, offset=Non
 
     :rtype: List[EventRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.person.listeventrelations(id, type, limit, offset)
 
 
 def operations_person_list_person_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -899,7 +899,7 @@ def operations_person_list_person_relations(id, type=None, accept_language=None,
 
     :rtype: List[PersonRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.person.listpersonrelations(id, type, accept_language, limit, offset)
 
 
 def operations_person_list_persons(limit=None, offset=None, year=None):  # noqa: E501
@@ -916,7 +916,7 @@ def operations_person_list_persons(limit=None, offset=None, year=None):  # noqa:
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.listpersons(limit, offset, year)
 
 
 def operations_person_list_settlement_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -937,7 +937,7 @@ def operations_person_list_settlement_relations(id, type=None, accept_language=N
 
     :rtype: List[SettlementRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.person.listsettlementrelations(id, type, accept_language, limit, offset)
 
 
 def operations_person_update_person(id):  # noqa: E501
@@ -950,7 +950,7 @@ def operations_person_update_person(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.person.updateperson(id)
 
 
 def operations_settlement_create_country_relation(id, body=None):  # noqa: E501
@@ -967,7 +967,7 @@ def operations_settlement_create_country_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.settlement.createcountryrelation(id, body)
 
 
 def operations_settlement_create_event_relation(id, body=None):  # noqa: E501
@@ -984,7 +984,7 @@ def operations_settlement_create_event_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.settlement.createeventrelation(id, body)
 
 
 def operations_settlement_create_person_relation(id, body=None):  # noqa: E501
@@ -1001,7 +1001,7 @@ def operations_settlement_create_person_relation(id, body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.settlement.createpersonrelation(id, body)
 
 
 def operations_settlement_create_settlement():  # noqa: E501
@@ -1012,7 +1012,7 @@ def operations_settlement_create_settlement():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.createsettlement()
 
 
 def operations_settlement_create_settlement_relation(id, body=None):  # noqa: E501
@@ -1029,7 +1029,7 @@ def operations_settlement_create_settlement_relation(id, body=None):  # noqa: E5
     """
     if connexion.request.is_json:
         body = object.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.settlement.createsettlementrelation(id, body)
 
 
 def operations_settlement_delete_country_relation(id, country_id):  # noqa: E501
@@ -1044,7 +1044,7 @@ def operations_settlement_delete_country_relation(id, country_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.deletecountryrelation(id, country_id)
 
 
 def operations_settlement_delete_event_relation(id, event_id):  # noqa: E501
@@ -1059,7 +1059,7 @@ def operations_settlement_delete_event_relation(id, event_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.deleteeventrelation(id, event_id)
 
 
 def operations_settlement_delete_person_relation(id, person_id):  # noqa: E501
@@ -1074,7 +1074,7 @@ def operations_settlement_delete_person_relation(id, person_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.deletepersonrelation(id, person_id)
 
 
 def operations_settlement_delete_settlement(id):  # noqa: E501
@@ -1087,7 +1087,7 @@ def operations_settlement_delete_settlement(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.deletesettlement(id)
 
 
 def operations_settlement_delete_settlement_relation(id, settlement_id):  # noqa: E501
@@ -1102,7 +1102,7 @@ def operations_settlement_delete_settlement_relation(id, settlement_id):  # noqa
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.deletesettlementrelation(id, settlement_id)
 
 
 def operations_settlement_get_settlement(id, accept_language=None):  # noqa: E501
@@ -1117,7 +1117,7 @@ def operations_settlement_get_settlement(id, accept_language=None):  # noqa: E50
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.getsettlement(id, accept_language)
 
 
 def operations_settlement_list_country_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -1138,7 +1138,7 @@ def operations_settlement_list_country_relations(id, type=None, accept_language=
 
     :rtype: List[CountryRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.listcountryrelations(id, type, accept_language, limit, offset)
 
 
 def operations_settlement_list_event_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -1159,7 +1159,7 @@ def operations_settlement_list_event_relations(id, type=None, accept_language=No
 
     :rtype: List[EventRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.listeventrelations(id, type, accept_language, limit, offset)
 
 
 def operations_settlement_list_person_relations(id, type=None, accept_language=None, limit=None, offset=None):  # noqa: E501
@@ -1180,7 +1180,7 @@ def operations_settlement_list_person_relations(id, type=None, accept_language=N
 
     :rtype: List[PersonRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.listpersonrelations(id, type, accept_language, limit, offset)
 
 
 def operations_settlement_list_settlement_relations(id, limit=None, offset=None, type=None, accept_language=None):  # noqa: E501
@@ -1201,7 +1201,7 @@ def operations_settlement_list_settlement_relations(id, limit=None, offset=None,
 
     :rtype: List[SettlementRelation]
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.listsettlementrelations(id, limit, offset, type, accept_language)
 
 
 def operations_settlement_list_settlements(limit=None, offset=None, year=None, population=None, accept_language=None):  # noqa: E501
@@ -1222,7 +1222,7 @@ def operations_settlement_list_settlements(limit=None, offset=None, year=None, p
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.listsettlements(limit, offset, year, population, accept_language)
 
 
 def operations_settlement_update_settlement(id):  # noqa: E501
@@ -1235,7 +1235,7 @@ def operations_settlement_update_settlement(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.settlement.updatesettlement(id)
 
 
 def operations_types_add_event_type(body=None):  # noqa: E501
@@ -1250,7 +1250,7 @@ def operations_types_add_event_type(body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = EventType.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.types.addeventtype(body)
 
 
 def operations_types_add_relation_type(body=None):  # noqa: E501
@@ -1265,7 +1265,7 @@ def operations_types_add_relation_type(body=None):  # noqa: E501
     """
     if connexion.request.is_json:
         body = EventType.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return swagger_server.services.types.addrelationtype(body)
 
 
 def operations_types_delete_event_type(id):  # noqa: E501
@@ -1278,7 +1278,7 @@ def operations_types_delete_event_type(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.types.deleteeventtype(id)
 
 
 def operations_types_delete_relation_type(id):  # noqa: E501
@@ -1291,7 +1291,7 @@ def operations_types_delete_relation_type(id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return swagger_server.services.types.deleterelationtype(id)
 
 
 def operations_types_get_event_type(id, accept_language=None):  # noqa: E501
@@ -1306,7 +1306,7 @@ def operations_types_get_event_type(id, accept_language=None):  # noqa: E501
 
     :rtype: EventType
     """
-    return 'do some magic!'
+    return swagger_server.services.types.geteventtype(id, accept_language)
 
 
 def operations_types_get_relation_type(id, accept_language=None):  # noqa: E501
@@ -1321,7 +1321,7 @@ def operations_types_get_relation_type(id, accept_language=None):  # noqa: E501
 
     :rtype: EventType
     """
-    return 'do some magic!'
+    return swagger_server.services.types.getrelationtype(id, accept_language)
 
 
 def operations_types_list_event_types(limit=None, offset=None, accept_language=None):  # noqa: E501
@@ -1338,7 +1338,7 @@ def operations_types_list_event_types(limit=None, offset=None, accept_language=N
 
     :rtype: List[EventType]
     """
-    return 'do some magic!'
+    return swagger_server.services.types.listeventtypes(limit, offset, accept_language)
 
 
 def operations_types_list_relation_types(limit=None, offset=None, accept_language=None):  # noqa: E501
@@ -1355,7 +1355,7 @@ def operations_types_list_relation_types(limit=None, offset=None, accept_languag
 
     :rtype: List[RelationType]
     """
-    return 'do some magic!'
+    return swagger_server.services.types.listrelationtypes(limit, offset, accept_language)
 
 
 def operations_types_update_event_type(id):  # noqa: E501
@@ -1368,7 +1368,7 @@ def operations_types_update_event_type(id):  # noqa: E501
 
     :rtype: EventType
     """
-    return 'do some magic!'
+    return swagger_server.services.types.updateeventtype(id)
 
 
 def operations_types_update_relation_type(id):  # noqa: E501
@@ -1381,4 +1381,4 @@ def operations_types_update_relation_type(id):  # noqa: E501
 
     :rtype: EventType
     """
-    return 'do some magic!'
+    return swagger_server.services.types.updaterelationtype(id)

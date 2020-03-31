@@ -16,7 +16,7 @@ with open(orig_filename, "r") as file:
             split = match.group(1).split("_")
             parameters = match.group(2)
             parameters = parameters.replace("=None", "")
-            functionCall = "services." + split[0] + "." + ''.join(split[1:]) + parameters
+            functionCall = "swagger_server.services." + split[0] + "." + ''.join(split[1:]) + parameters
         if "return 'do some magic!'" in line:
             line = line.replace("'do some magic!'", functionCall)
             print(line)
