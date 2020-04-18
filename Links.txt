@@ -1,0 +1,9 @@
+Links:
+
+https://en.wikipedia.org/wiki/Wikipedia:Finding_a_Wikidata_ID
+https://github.com/isawnyu/pleiades-datasets
+http://api.pleiades.stoa.org/
+https://pleiades.stoa.org/downloads
+https://www.mediawiki.org/wiki/API:Opensearch
+https://www.mediawiki.org/wiki/API:Main_page
+https://developer-blog.net/einstieg-in-die-wikipedia-api-am-beispiel-einer-infobox-abfrage/
